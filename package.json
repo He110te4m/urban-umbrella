@@ -1,0 +1,25 @@
+{
+  "name": "headless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "libs/index.mjs",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-v3",
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.36.0",
+    "@he110/utils": "^0.4.0",
+    "@types/eslint": "^8.21.1",
+    "@types/glob": "^8.1.0",
+    "eslint": "^8.35.0",
+    "glob": "^9.2.1",
+    "rimraf": "^4.3.0",
+    "standard-version": "^9.5.0",
+    "tsup": "^6.6.3",
+    "typescript": "^4.9.5"
+  }
+}

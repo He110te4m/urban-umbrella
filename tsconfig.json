@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "checkJs": true,
+    "allowJs": true,
+    "declaration": true,
+    "declarationMap": false,
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "rootDir": ".",
+    "outDir": "libs",
+  },
+  "include": [
+    "src/**/*.ts",
+    "types/**/*.d.ts",
+    ".eslintrc.js",
+    "tsup.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "libs"
+  ]
+}
