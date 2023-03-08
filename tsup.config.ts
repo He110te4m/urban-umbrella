@@ -4,15 +4,16 @@ import { getExtensionByFormat } from '@he110/utils'
 
 export default defineConfig(() => {
   return {
-    entry: globSync('src/index.ts'), // globSync('src/*/index.ts').concat(globSync('src/index.ts')),
+    entry: globSync('src/index.ts'),
     format: ['esm', 'cjs'],
-    minify: true,
+    minify: false,
     splitting: true,
     clean: true,
     treeshake: true,
     sourcemap: true,
     dts: true,
     outDir: 'libs',
+    platform: 'browser',
     noExternal: [
     ],
     outExtension({ format }) {

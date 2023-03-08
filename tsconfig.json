@@ -19,11 +19,18 @@
     "baseUrl": ".",
     "rootDir": ".",
     "outDir": "libs",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "types": [
+      "vite/client",
+      "vite-plugin-pages/client"
+    ]
   },
   "include": [
     "src/**/*.ts",
     "types/**/*.d.ts",
-    ".eslintrc.js",
+    ".eslintrc.cjs",
     "tsup.config.ts"
   ],
   "exclude": [

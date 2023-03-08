@@ -1,25 +1,37 @@
 {
-  "name": "headless",
+  "name": "vue-headless",
   "version": "1.0.0",
   "description": "",
   "main": "libs/index.mjs",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "tsup"
   },
   "keywords": [],
   "author": "",
   "license": "GPL-v3",
+  "peerDependencies": {
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.36.0",
     "@he110/utils": "^0.4.0",
     "@types/eslint": "^8.21.1",
     "@types/glob": "^8.1.0",
+    "@vitejs/plugin-vue": "^4.0.0",
     "eslint": "^8.35.0",
     "glob": "^9.2.1",
     "rimraf": "^4.3.0",
     "standard-version": "^9.5.0",
     "tsup": "^6.6.3",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "unplugin-auto-import": "^0.15.1",
+    "vite": "^4.1.4",
+    "vite-plugin-inspect": "^0.7.15",
+    "vite-plugin-pages": "^0.28.0",
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
   }
 }

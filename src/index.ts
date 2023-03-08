@@ -1,3 +1,1 @@
-export function test () {
-  return 'hello world'
-}
+export * from './headless/NavMenu'
