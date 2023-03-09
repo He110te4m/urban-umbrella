@@ -1,1 +1,1 @@
-export * from './src/useNavMenu'
+export * from './src/useNavMenus'

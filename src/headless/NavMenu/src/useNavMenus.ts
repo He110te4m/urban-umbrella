@@ -3,7 +3,7 @@ import type { Ref } from 'vue'
 import { each, filter } from './iterator'
 import type { NavMenuChildrenConfig, NavMenuConfig, NavMenuOptions, NavMenuVisitor } from './types'
 
-export function useNavMenu<TData extends AnyObject, TKey extends AnyKey>(
+export function useNavMenus<TData extends AnyObject, TKey extends AnyKey>(
   activeKey: Ref<TKey | undefined | null>,
   config: NavMenuConfig<TData, TKey>,
 ) {
@@ -22,10 +22,10 @@ export function useNavMenu<TData extends AnyObject, TKey extends AnyKey>(
     },
   }
 
-  return useBaseNavMenu(activeKey, opt)
+  return useBaseNavMenus(activeKey, opt)
 }
 
-export function useBaseNavMenu<TData extends AnyObject, TKey extends AnyKey>(
+export function useBaseNavMenus<TData extends AnyObject, TKey extends AnyKey>(
   activeKey: Ref<TKey | undefined | null>,
   opt: NavMenuOptions<TData, TKey>,
 ) {

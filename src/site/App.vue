@@ -15,7 +15,7 @@ import LayoutSidebar from './layouts/Sidebar.vue'
 }
 
 .container .sidebar {
-  flex: 0 0 200px;
+  flex: 0 0 240px;
 }
 .container .content {
   flex: 1;
