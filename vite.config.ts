@@ -7,6 +7,8 @@ import Inspect from 'vite-plugin-inspect'
 
 const projectRootDir = __dirname
 
+const demoBaseRoute = 'demo'
+
 // https://vitejs.dev/config/
 export default defineConfig(() => {
   return {
@@ -26,13 +28,16 @@ export default defineConfig(() => {
       // https://github.com/hannoeru/vite-plugin-pages
       Page({
         dirs: [
-          { dir: 'src/**/demo', baseRoute: 'demo' },
+          { dir: 'src/**/demo', baseRoute: demoBaseRoute },
         ],
         exclude: ['**/!(index).vue'],
         extensions: ['vue'],
         onRoutesGenerated(routes) {
           routes.forEach((route) => {
-            route.path = route.component.slice(4, 0 - '/index.vue'.length)
+            route.path = route.component.replace(
+              new RegExp(`[\\\\\\\/](src|headless|${demoBaseRoute}|index\\.vue)`, 'ig'),
+              '',
+            )
             route.name = route.path
               .split(/[\\\/]/g)
               .map((dir: string) => dir.charAt(0).toUpperCase() + dir.slice(1))
