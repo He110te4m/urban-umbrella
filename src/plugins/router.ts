@@ -6,6 +6,14 @@ export const init: AppPlugin['init'] = ({ app }) => {
 }
 
 function getRouter() {
+  // 添加默认首页，可以自动跳转路由
+  if (routes.length) {
+    routes.reverse().unshift({
+      path: '/',
+      redirect: routes[0].path,
+    })
+  }
+
   if (import.meta.env.DEV) {
     window.console.log('routes: ', routes)
   }

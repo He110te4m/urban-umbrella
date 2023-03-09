@@ -15,6 +15,7 @@ export default defineConfig(() => {
     outDir: 'libs',
     platform: 'browser',
     noExternal: [
+      'klona',
     ],
     outExtension({ format }) {
       return {

@@ -18,7 +18,6 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "rootDir": ".",
-    "outDir": "libs",
     "paths": {
       "~/*": ["src/*"]
     },
@@ -29,8 +28,8 @@
   },
   "include": [
     "src/**/*.ts",
+    "src/**/*.vue",
     "types/**/*.d.ts",
-    ".eslintrc.cjs",
     "tsup.config.ts"
   ],
   "exclude": [
