@@ -6,24 +6,24 @@
 module.exports = {
   extends: ['@antfu'],
   rules: {
-    curly: [
-      2, 'all'
+    'curly': [
+      2, 'all',
     ],
     'spaced-comment': ['error', 'always',
       {
         line: {
-          markers: ['#region', '#endregion', 'region', 'endregion', '/'
-          ]
-        }
-      }
+          markers: ['#region', '#endregion', 'region', 'endregion', '/',
+          ],
+        },
+      },
     ],
     '@typescript-eslint/brace-style': [
       2,
-      '1tbs'
+      '1tbs',
     ],
     '@typescript-eslint/ban-ts-comment': 0,
     'vue/custom-event-name-casing': [
-      2, 'kebab-case'
+      2, 'kebab-case',
     ],
   },
   ignorePatterns: [
