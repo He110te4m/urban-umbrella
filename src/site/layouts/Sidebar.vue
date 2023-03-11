@@ -1,18 +1,7 @@
 <script lang="ts" setup>
 import { useMenus } from './menu/useMenus'
 
-const { activeKey, menus, activeNodes } = useMenus()
-const route = useRoute()
-watch(
-  () => route.path,
-  () => {
-    activeKey.value = route.path
-  },
-)
-const router = useRouter()
-function go(url: string) {
-  router.push(url)
-}
+const { onMenuItemClick, menus, activeNodes } = useMenus()
 </script>
 
 <template>
@@ -31,7 +20,7 @@ function go(url: string) {
         <dl class="headless-component-demo-list">
           <dd
             v-for="item in category.children" :key="item.url" class="headless-component-demo-item"
-            :class="{ active: activeNodes.includes(item.url) }" @click="go(item.url)"
+            :class="{ active: activeNodes.includes(item.url) }" @click="onMenuItemClick(item.url)"
           >
             <span class="headless-component-demo-link">
               {{ item.label }}
