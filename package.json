@@ -4,6 +4,14 @@
   "description": "",
   "main": "libs/index.mjs",
   "type": "module",
+  "exports": {
+    "./libs/*": {
+      "import": "./libs/*/index.mjs",
+      "require": "./libs/*/index.cjs",
+      "default": "./libs/*/index.global.js",
+      "types": "./libs/*/index.d.ts"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsup"

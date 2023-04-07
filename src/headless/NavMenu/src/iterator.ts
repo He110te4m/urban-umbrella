@@ -1,4 +1,5 @@
 import type { NavMenuVisitor } from './types'
+import type { AnyKey, AnyObject } from '~/headless/types/utils'
 
 interface FilterCallbackParams<TData extends AnyObject> {
   item: TData
