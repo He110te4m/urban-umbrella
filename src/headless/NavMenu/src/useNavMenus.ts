@@ -2,6 +2,7 @@ import { klona } from 'klona'
 import type { Ref } from 'vue'
 import { each, filter } from './iterator'
 import type { NavMenuChildrenConfig, NavMenuConfig, NavMenuOptions, NavMenuVisitor } from './types'
+import type { AnyKey, AnyObject } from '~/headless/types/utils'
 
 export function useNavMenus<TData extends AnyObject, TKey extends AnyKey>(
   activeKey: Ref<TKey | undefined | null>,

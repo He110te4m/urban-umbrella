@@ -1,3 +1,5 @@
+import type { AnyKey, AnyObject } from '~/headless/types/utils'
+
 export interface NavMenuChildrenConfig<TData extends AnyObject> {
   getChildren: (item: TData) => TData[]
   setChildren: (item: TData, list: TData[]) => void
