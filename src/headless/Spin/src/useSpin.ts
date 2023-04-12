@@ -1,4 +1,5 @@
-import { useGlobalState } from '~/composables/useGlobalState'
+import type { ComputedRef } from 'vue'
+import { createSharedScope } from '~/utils/createSharedScope'
 
 /** 是否需要展示遮罩，支持响应和非响应方式 */
 type State = MaybeRef<boolean>
@@ -21,62 +22,30 @@ interface StateOption {
 type SpinState = State | StateOption
 
 /** state store 的 factory 类型 */
-type MakeSpinningStateFn = ReturnType<typeof createSpinStoreFactory>
-
-interface SpinContainerInjector {
-  makeSpinState: MakeSpinningStateFn
-}
-
-/**
- * 保存全局的 state factory，外部使用的时候
- * 只需要关注 key 是否相同即可，
- * 相同 key 会使用同一个 spinning
- */
-const stateMap = new Map<Symbol, MakeSpinningStateFn>()
-
-/** 默认都使用这个 key */
-const defaultStateID = Symbol('default')
-
-/**
- * 创建 state store 的 factory 函数
- */
-function createSpinStoreFactory() {
-  return useGlobalState(() => ({
-    spinStateList: ref<StateOption[]>([]),
-  }))
-}
+type SpinStore = ReturnType<typeof createSpinStore>
 
 /** 提供给任意组件处理 spin 的能力 */
-export function useSpin(id: Symbol = defaultStateID) {
-  let makeSpinState = stateMap.get(id)
-  if (!makeSpinState) {
-    makeSpinState = createSpinStoreFactory()
-    stateMap.set(id, makeSpinState)
-  }
-
-  const resources = createSpinResources(makeSpinState)
-
-  onBeforeRouteLeave(() => {
-    resources.cleanupSpinState()
-    stateMap.clear()
+export function useSpin(id: symbol) {
+  const { state, dispose } = createSharedScope({
+    id,
+    onEffect: () => createSpinStore(),
+    onDispose: () => {
+      cleanupSpinStore(state)
+    },
   })
 
-  return resources
-}
-
-function createSpinResources(makeSpinState: MakeSpinningStateFn) {
   return {
     /** 提供给业务的带有响应性的 `spinning` 状态 */
-    spinning: makeSpinning({ makeSpinState }),
+    spinning: makeSpinning(state),
     /** 提供函数，让调用者能为 `spinning` 施加影响 */
-    registerSpinState: makeRegisterSpinState({ makeSpinState }),
+    registerSpinState: makeRegisterSpinState(state),
     /** 清空当前所有的影响，如页面切换时就可以调用 */
-    cleanupSpinState: makeCleanupSpinState({ makeSpinState }),
+    cleanupSpinState: dispose,
   }
 }
 
-function makeSpinning({ makeSpinState }: SpinContainerInjector): ComputedRef<boolean> {
-  const { spinStateList } = makeSpinState()
+function makeSpinning(store: SpinStore | undefined): ComputedRef<boolean> {
+  const spinStateList = getList(store)
 
   return computed(
     () =>
@@ -88,23 +57,36 @@ function makeSpinning({ makeSpinState }: SpinContainerInjector): ComputedRef<boo
 }
 
 /** 添加 spin 受控 state */
-function makeRegisterSpinState({ makeSpinState }: SpinContainerInjector): (state: SpinState) => void {
+function makeRegisterSpinState(store: SpinStore | undefined): (state: SpinState) => void {
   return (state: SpinState) => {
-    const { spinStateList } = makeSpinState()
+    const spinStateList = getList(store)
 
     const option = isStateOption(state) ? state : { state, dependOn: [] }
     spinStateList.value.push(reactive(option))
   }
 }
 
-/** 清空 spin 受控 state， spining 会重置为 false */
-function makeCleanupSpinState({ makeSpinState }: SpinContainerInjector): () => void {
-  return () => {
-    const { spinStateList } = makeSpinState()
-    spinStateList.value = []
+/**
+ * 创建 state store 的 factory 函数
+ */
+function createSpinStore() {
+  const spinStateList = ref<StateOption[]>([])
+  const sharedState = {
+    spinStateList,
+  }
+  return sharedState
+}
+
+function cleanupSpinStore(store: SpinStore | undefined): void {
+  if (store) {
+    store.spinStateList.value = []
   }
 }
 
 function isStateOption(val: SpinState): val is StateOption {
   return !isRef(val) && typeof val !== 'boolean'
+}
+
+function getList(store: SpinStore | undefined): SpinStore['spinStateList'] {
+  return store?.spinStateList ?? ref([])
 }
