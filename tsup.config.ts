@@ -6,7 +6,7 @@ import AutoImport from 'unplugin-auto-import/esbuild'
 export default defineConfig(() => {
   return {
     entry: globSync('src/headless/*/index.ts').map(p => p.replace(/[/\\]/g, '/')),
-    format: ['esm', 'cjs'],
+    format: ['esm', 'cjs', 'iife'],
     minify: false,
     splitting: true,
     clean: true,
