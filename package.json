@@ -1,5 +1,5 @@
 {
-  "name": "vue-headless",
+  "name": "@he110/vue-headless",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -16,7 +16,7 @@
     "build": "tsup"
   },
   "keywords": [],
-  "author": "",
+  "author": "he110te4m",
   "license": "GPL-v3",
   "peerDependencies": {
     "vue": "^3.2.47",
