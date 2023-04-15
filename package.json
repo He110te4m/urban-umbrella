@@ -2,7 +2,6 @@
   "name": "vue-headless",
   "version": "1.0.0",
   "description": "",
-  "main": "libs/index.mjs",
   "type": "module",
   "exports": {
     "./libs/*": {

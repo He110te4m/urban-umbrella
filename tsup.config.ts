@@ -11,7 +11,6 @@ export default defineConfig(() => {
     splitting: true,
     clean: true,
     treeshake: true,
-    sourcemap: true,
     dts: true,
     outDir: 'libs',
     platform: 'browser',
