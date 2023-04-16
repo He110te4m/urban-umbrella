@@ -1,6 +1,6 @@
 {
   "name": "@he110/vue-headless",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "type": "module",
   "exports": {
@@ -11,6 +11,9 @@
       "types": "./libs/*/index.d.ts"
     }
   },
+  "files": [
+    "libs"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsup"
